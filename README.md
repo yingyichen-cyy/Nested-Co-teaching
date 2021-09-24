@@ -131,7 +131,7 @@ Download CIFAR-10/CIFAR-100 to `./data/`. Once they are downloaded, please condu
 
 ``` Bash
 cd data/
-## Split into train/val / test
+## Split into train/val/test
 python preprocess_cifar10.py
 
 python preprocess_cifar100.py
@@ -257,3 +257,14 @@ python3 test.py --test-dir ../data/Animal10N/test/ --dataset Animal10N --resumeP
 ```
 
 More details can be found in [co_teaching_vgg/run_test.sh](https://github.com/yingyichen-cyy/Nested-Co-teaching/blob/master/co_teaching_vgg/run_test.sh).
+
+* Networks trained on CIFAR-10/CIFAR-100:
+``` Bash
+cd co_teaching_resnet/ 
+# CIFAR-10
+python3 test.py --test-dir ../data/CIFAR10/test/ --dataset CIFAR10 --arch resnet18 --resumePthList ./finetune_ckpt/cifar10sn0.2_nested10_lr1e-3_bs320_freezeBN_fgr0.2_pre_nested10_10_model2_Acc0.922_K11 --KList 11 --gpu 0
+
+# CIFAR-100
+python3 test.py --test-dir ../data/CIFAR100/test/ --dataset CIFAR100 --arch resnet18 --resumePthList ./finetune_ckpt/cifar100sn0.2_nested100_lr1e-3_bs320_freezeBN_fgr0.2_pre_nested100_100_model1_Acc0.669_K40 --KList 40 --gpu 0
+```
+More details can be found in [co_teaching_resnet/run_test.sh](https://github.com/yingyichen-cyy/Nested-Co-teaching/blob/master/co_teaching_resnet/run_test.sh).

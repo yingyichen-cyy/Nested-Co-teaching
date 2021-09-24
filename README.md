@@ -125,6 +125,32 @@ To download ANIMAL-10N dataset [[Song et al., 2019]](http://proceedings.mlr.pres
 └── test
 ```
 
+#### CIFAR-10/CIFAR-100
+
+Download CIFAR-10/CIFAR-100 to `./data/`. Once they are downloaded, please conduct the following preprocessing :
+
+``` Bash
+cd data/
+## Split into train/val / test
+python preprocess_cifar10.py
+
+python preprocess_cifar100.py
+``` 
+
+Please refer to `./data/create_cifar_noise.sh` to generate the noisy traing sets. The structure of the file should be: 
+
+
+```
+./data/CIFAR10 (./data/CIFAR100)
+├── train  
+├── val
+├── test   
+├── train_sn_0.2  
+├── train_sn_0.5 
+├── train_sn_0.8  
+├── train_an_0.3
+└── train_an_0.5
+```
 
 ## 4. Train
 
@@ -145,6 +171,17 @@ python3 train_resnet.py --train-dir ../data/Clothing1M/noisy_rand_subtrain1/ --v
 ``` Bash
 cd nested/ 
 python3 train_vgg.py --train-dir ../data/Animal10N/train/ --val-dir ../data/Animal10N/test/ --dataset Animal10N --arch vgg19-bn --lr-gamma 0.2 --batchsize 128 --warmUpIter 6000 --nested1 100 --nested2 100 --alter-train --out-dir ./checkpoints_animal10n/Animal10N_alter_nested100_100_vgg19bn_lr0.1_warm6000_bs128_model1 --gpu 0
+```
+
+* For training networks on CIFAR-10/CIFAR-100 (ResNet-18). You can also train baseline/dropout networks for comparisons. More details are provided in [nested/run_cifar.sh](https://github.com/yingyichen-cyy/Nested-Co-teaching/blob/master/nested/run_cifar.sh).
+
+``` Bash
+cd nested/ 
+# CIFAR-10 Symmetric 20%, Nested=10
+python train_resnet.py --train-dir ../data/CIFAR10/train_sn_0.2/ --val-dir ../data/CIFAR10/val/ --dataset CIFAR10 --arch resnet18 --out-dir ./checkpoints/cifar10sn0.2_nested10_model1 --nested 10 --gpu 0
+
+# CIFAR-100 Symmetric 20%, Nested=100
+python train_resnet.py --train-dir ../data/CIFAR100/train_sn_0.2/ --val-dir ../data/CIFAR100/val/ --dataset CIFAR100 --arch resnet18 --out-dir ./checkpoints/cifar100sn0.2_nested100_model1 --nested 100 --gpu 0
 ```
 
 ### 4.2. Stage Two : Fine-tuning with Co-teaching 
@@ -168,6 +205,19 @@ python3 main.py --train-dir ../data/Animal10N/train/ --val-dir ../data/Animal10N
 
 The two Nested VGG-19+BN networks trained in stage one can be downloaded here: [ckpt1](https://drive.google.com/drive/folders/1hGwZ1-3phjRa-Poo-vAWzWXQUyqLqlOF?usp=sharing), [ckpt2](https://drive.google.com/drive/folders/1Hcvp6Emk0yvC1gT7BsGdKUehnOtus0-q?usp=sharing). We also provide commands for training Co-teaching from scratch for comparisons in [co_teaching_vgg/run_animal10n.sh](https://github.com/yingyichen-cyy/Nested-Co-teaching/blob/master/co_teaching_vgg/run_animal10n.sh).
 
+* For fine-tuning with Co-teaching on CIFAR-10/CIFAR-100 (ResNet-18) :
+
+``` Bash
+cd co_teaching_resnet/ 
+# CIFAR-10 Symmetric 20%, Nested=10
+python3 main.py --train-dir ../data/CIFAR10/train_sn_0.2/ --val-dir ../data/CIFAR10/val/ --dataset CIFAR10 --lrSchedule 50 --nGradual 0 --lr 0.001 --nbEpoch 100 --warmUpIter 0 --batchsize 320 --freeze-bn --forgetRate 0.2 --out-dir ./finetune_ckpt/cifar10sn0.2_nested10_lr1e-3_bs320_freezeBN_fgr0.2_pre_nested10_10 --resumePthList ../nested/checkpoints/cifar10sn0.2_nested10_model1_Acc0.891_K9 ../nested/checkpoints/cifar10sn0.2_nested10_model3_Acc0.898_K8 --nested 10 --gpu 0
+
+# CIFAR-100 Symmetric 20%, Nested=100
+python3 main.py --train-dir ../data/CIFAR100/train_sn_0.2/ --val-dir ../data/CIFAR100/val/ --dataset CIFAR100 --lrSchedule 50 --nGradual 0 --lr 0.001 --nbEpoch 100 --warmUpIter 0 --batchsize 320 --freeze-bn --forgetRate 0.2 --out-dir ./finetune_ckpt/cifar100sn0.2_nested100_lr1e-3_bs320_freezeBN_fgr0.2_pre_nested100_100 --resumePthList ../nested/checkpoints/cifar100sn0.2_nested100_model1_Acc0.592_K46 ../nested/checkpoints/cifar100sn0.2_nested100_model3_Acc0.584_K41 --nested 100 --gpu 0
+```
+
+The four Nested ResNet-18 networks trained in stage one can be downloaded here: [CIFAR-10 ckpt1](https://drive.google.com/drive/folders/1FgfBAiWHg9A70vGoSLU2RUJxELXeGwJm?usp=sharing), [CIFAR-10 ckpt2](https://drive.google.com/drive/folders/1DbSih1iMScnMeaiykTMe_AdAcKHpuG16?usp=sharing), [CIFAR-100 ckpt1](https://drive.google.com/drive/folders/1ABzUEIg__Aqnyj0RPkIhRu_PMSAAbsYt?usp=sharing), [CIFAR-100 ckpt2](https://drive.google.com/drive/folders/1jsXjmmjsbVmz34Ji_fMzAks-ttP9o9L1?usp=sharing).
+
 ## 5. Evaluation
 
 To evaluate models' ability of combating with label noise, we compute classification accuracy on a provided clean test set.
@@ -178,8 +228,11 @@ Evaluation of networks derived from stage one are provided here :
 
 ``` Bash
 cd nested/ 
-# for networks on 
+# for networks on Clothing1M
 python3 test.py --test-dir ../data/Clothing1M/clean_test/ --dataset Clothing1M --arch resnet18 --resumePthList ./checkpoints/Cloth1M_nested100_lr2e-2_bs448_imgnet_freezeBN_model1_Acc0.735_K12 --KList 12 --gpu 0
+
+# for networks on CIFAR-10
+python3 test.py --test-dir ../data/CIFAR10/test/ --dataset CIFAR10 --arch resnet18 --resumePthList ./checkpoints/cifar10sn0.2_nested10_model1_Acc0.891_K9 --KList 9 --gpu 0
 ```
 
 More details can be found in [nested/run_test.sh](https://github.com/yingyichen-cyy/Nested-Co-teaching/blob/master/nested/run_test.sh). Note that "\_K12" in the model's name denotes the index of the optimal K, and the optimal number of channels for the model is actually 13 (nb of optimal channels = index of channel + 1).

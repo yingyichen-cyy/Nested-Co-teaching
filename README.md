@@ -4,6 +4,8 @@
 
 [[PDF]](https://arxiv.org/abs/2104.13766) [[Video]](https://www.youtube.com/watch?v=y9zBDioKMM0&t=5s&ab_channel=LearningwithLimitedandImperfectData)
 
+For more experiments and theoretical understanding of this work, please refer to our TNNLS 2022 paper: [[Journal PDF]]() [[Project Page]](https://yingyichen-cyy.github.io/CompressFeatNoisyLabels/)
+
 If our project is helpful for your research, please consider citing :
 ``` 
 @inproceedings{chen2021boosting, 

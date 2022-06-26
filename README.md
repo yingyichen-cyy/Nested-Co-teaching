@@ -2,7 +2,7 @@
 
 ([L2ID@CVPR2021](https://l2id.github.io/)) Pytorch implementation of paper "Boosting Co-teaching with Compression Regularization for Label Noise" 
 
-[[PDF]](https://arxiv.org/abs/2104.13766) [[Video]](https://www.youtube.com/watch?v=y9zBDioKMM0&t=5s&ab_channel=LearningwithLimitedandImperfectData) [[Journal PDF]] [[Project Page]](https://yingyichen-cyy.github.io/CompressFeatNoisyLabels/)
+[[Conference PDF]](https://arxiv.org/abs/2104.13766) [[Video]](https://www.youtube.com/watch?v=y9zBDioKMM0&t=5s&ab_channel=LearningwithLimitedandImperfectData) [[Journal PDF]] [[Journal Project Page]](https://yingyichen-cyy.github.io/CompressFeatNoisyLabels/)
 
 If our project is helpful for your research, please consider citing :
 ``` 

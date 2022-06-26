@@ -2,7 +2,7 @@
 
 ([L2ID@CVPR2021](https://l2id.github.io/)) Pytorch implementation of paper "Boosting Co-teaching with Compression Regularization for Label Noise" 
 
-[[PDF]](https://arxiv.org/abs/2104.13766) [[Video]](https://www.youtube.com/watch?v=y9zBDioKMM0&t=5s&ab_channel=LearningwithLimitedandImperfectData)
+[[PDF]](https://arxiv.org/abs/2104.13766) [[Video]](https://www.youtube.com/watch?v=y9zBDioKMM0&t=5s&ab_channel=LearningwithLimitedandImperfectData) [[Journal PDF]] [[Project Page]](https://yingyichen-cyy.github.io/CompressFeatNoisyLabels/)
 
 If our project is helpful for your research, please consider citing :
 ``` 
@@ -15,10 +15,6 @@ If our project is helpful for your research, please consider citing :
 ```
 
 Our model can be learnt in a **single GPU GeForce GTX 1080Ti** (12G), this code has been tested with **[Pytorch 1.7.1](https://pytorch.org/get-started/previous-versions/#v171)**
-
-For more experiments and theoretical understanding, please refer to our "Compressing Features for Learning with Noisy Labels" (TNNLS 2022)
-
-[[PDF]]() [[Project Page]](https://yingyichen-cyy.github.io/CompressFeatNoisyLabels/)
 
 ## Table of Content
 * [1. Toy Results](#1-toy-results)

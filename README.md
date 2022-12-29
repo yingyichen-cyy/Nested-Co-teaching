@@ -1,8 +1,8 @@
 # Nested-Co-teaching
 
-([L2ID@CVPR2021](https://l2id.github.io/), TNNLS2022) Pytorch implementation of paper "Boosting Co-teaching with Compression Regularization for Label Noise" 
+([L2ID@CVPR2021](https://l2id.github.io/), [TNNLS2022](https://ieeexplore.ieee.org/abstract/document/9819959)) Pytorch implementation of paper "Boosting Co-teaching with Compression Regularization for Label Noise" 
 
-[[PDF]](https://arxiv.org/abs/2104.13766) [[Video]](https://www.youtube.com/watch?v=y9zBDioKMM0&t=5s&ab_channel=LearningwithLimitedandImperfectData) [[Journal PDF (TNNLS 2022)]](https://arxiv.org/abs/2206.13140) [[Project Page]](https://yingyichen-cyy.github.io/CompressFeatNoisyLabels/)
+[[PDF]](https://arxiv.org/abs/2104.13766) [[Video]](https://www.youtube.com/watch?v=y9zBDioKMM0&t=5s&ab_channel=LearningwithLimitedandImperfectData) [[Journal PDF (TNNLS 2022)]](https://ieeexplore.ieee.org/abstract/document/9819959) [[Project Page]](https://yingyichen-cyy.github.io/CompressFeatNoisyLabels/)
 
 If our project is helpful for your research, please consider citing :
 ``` 

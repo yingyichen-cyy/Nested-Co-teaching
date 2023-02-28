@@ -1,6 +1,6 @@
 # Nested-Co-teaching
 
-([L2ID@CVPR2021](https://l2id.github.io/), [TNNLS2022](https://ieeexplore.ieee.org/abstract/document/9819959)) Pytorch implementation of paper "Boosting Co-teaching with Compression Regularization for Label Noise" 
+([L2ID@CVPR2021](https://l2id.github.io/), [TNNLS2022](https://ieeexplore.ieee.org/abstract/document/9819959)) Pytorch implementation of paper "Boosting Co-teaching with Compression Regularization for Label Noise" and "Compressing Features for Learning With Noisy Labels".
 
 [[PDF](https://arxiv.org/abs/2104.13766)] [[Video](https://www.youtube.com/watch?v=y9zBDioKMM0&t=5s&ab_channel=LearningwithLimitedandImperfectData)] [[Journal PDF (TNNLS 2022)](https://arxiv.org/abs/2206.13140?context=stat.ML)] [[Project Page](https://yingyichen-cyy.github.io/CompressFeatNoisyLabels/)]
 
@@ -13,6 +13,15 @@ If our project is helpful for your research, please consider citing :
 	  year={2021} 
 	}
 ```
+or
+``` 
+@ARTICLE{chen2022compressing,
+	  title={Compressing Features for Learning with Noisy Labels}, 
+          author={Chen, Yingyi and Hu, Shell Xu and Shen, Xi and Ai, Chunrong and Suykens, Johan A. K.},
+          journal={IEEE Transactions on Neural Networks and Learning Systems}, 
+          year={2022}
+        }
+``` 
 
 Our model can be learnt in a **single GPU GeForce GTX 1080Ti** (12G), this code has been tested with **[Pytorch 1.7.1](https://pytorch.org/get-started/previous-versions/#v171)**
 
